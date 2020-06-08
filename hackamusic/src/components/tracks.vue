@@ -4,7 +4,7 @@
       <ul>
         <li v-for="track in tracks" :key="track.id">
           <a :href="track.url">{{ track.name }}</a>
-          <p class="artist">{{track.artist.name}}</p>
+          <p class="artist">by {{track.artist.name}}</p>
           <p class="listeners">{{ track.listeners }} listeners</p>
         </li>
       </ul>

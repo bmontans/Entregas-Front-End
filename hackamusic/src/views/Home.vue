@@ -4,7 +4,9 @@
     <menucustom></menucustom>
     <div>
       <h1>WELCOME TO HACK FM</h1>
-      <p>CLICK ON THE TAGS BELOW TO SEARCH ARTISTS BASED ON YOUR FAVOURITE GENRES</p>
+      <p>CHECK OUT WHAT THE TOP ARTISTS AND SONGS OF THE WEEK ARE BY CLICKING ON THE MENU ABOVE</p>
+      <br />
+      <p>YOU CAN ALSO CLICK ON THE TAGS BELOW TO DISCOVER NEW ARTISTS BASED ON YOUR FAVOURITE GENRES</p>
     </div>
     <tags :tags="tags"></tags>
     <footercustom></footercustom>
@@ -35,5 +37,6 @@ export default {
 div {
   color: #f2f5ea;
   margin: 3rem;
+  font-size: 15px;
 }
 </style>
