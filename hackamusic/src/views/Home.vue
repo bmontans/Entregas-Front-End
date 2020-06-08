@@ -2,14 +2,16 @@
   <div>
     <vue-headful title="Home" />
     <menucustom></menucustom>
+    <div>
+      <h1>WELCOME TO HACK FM</h1>
+      <p>CLICK ON THE TAGS BELOW TO SEARCH ARTISTS BASED ON YOUR FAVOURITE GENRES</p>
+    </div>
     <tags :tags="tags"></tags>
     <footercustom></footercustom>
   </div>
 </template>
 
 <script>
-/*  Importamos los componentes */
-import Swal from "sweetalert2";
 import api from "@/api/index.js";
 import tags from "@/components/tags.vue";
 import footercustom from "@/components/FooterCustom.vue";
@@ -30,4 +32,8 @@ export default {
 };
 </script>
 <style scoped>
+div {
+  color: #f2f5ea;
+  margin: 3rem;
+}
 </style>
