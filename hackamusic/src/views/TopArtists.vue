@@ -58,7 +58,7 @@ export default {
 <style>
 label {
   font-style: oblique;
-  color: #0e0004;
+  color: #f2f5ea;
   margin: 1rem;
 }
 input {

@@ -39,6 +39,7 @@ a.router-link-exact-active {
   color: #7a9b76;
 }
 h1 {
+  font-size: 50px;
   color: #f2f5ea;
   text-shadow: 2px 2px #e75a7c;
   margin: 1rem;
