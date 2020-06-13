@@ -20,11 +20,10 @@
 
 <script>
 import menucustom from "@/components/MenuCustom.vue";
-import footercustom from "@/components/FooterCustom.vue";
 
 export default {
   name: "About",
-  components: { menucustom, footercustom },
+  components: { menucustom},
 };
 </script>
 
