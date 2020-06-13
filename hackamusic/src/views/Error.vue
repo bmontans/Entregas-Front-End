@@ -1,17 +1,17 @@
 <template>
-  <div class="error">
-    <h1>Woah!</h1>
-    <br />
-    <p>This is an error page.</p>
-    <p>Please, use the navitagion menu to return to the main page.</p>
+  <div>
+    <vue-headful title="Error" />
+    <h1>ERROR</h1>
+    <p>😭 Where are you going? This page does not exist</p>
+    <footercustom></footercustom>
   </div>
 </template>
 
 <script>
-export default {
-  name: "Error"
-};
+import footercustom from "@/components/FooterCustom.vue";
+
+export default { name: "Error", components: { footercustom } };
 </script>
 
-<style>
+<style scoped>
 </style>

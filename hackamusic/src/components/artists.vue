@@ -34,8 +34,7 @@ p {
   color: #7a9b76;
 }
 img {
-  opacity: 40%;
-  border-radius: 50%;
+  opacity: 0.4;
 }
 ul {
   list-style: none;

@@ -1,33 +1,46 @@
 <template>
-  <div id="nav">
-    <router-link to="/home">Home</router-link>
-    <br />
-    <router-link to="/about">About</router-link>|
-    <router-link to="/market">Market</router-link>|
-    <router-link to="/add-client">Add Client</router-link>
-    <br />
-    <br />
-    <button @click="logoutUser()">LOGOUT</button>
-    <br />
+  <div>
+    <div id="nav">
+      <!--  Cabecera común a todas las vistas -->
+      <h1>Hack FM</h1>
+      <router-link to="/">Home</router-link>
+      <br />
+    </div>
+    <div id="router">
+      <router-link to="/top-tracks">Top Tracks</router-link>|
+      <router-link to="/top-artists">Top Artists</router-link>|
+      <router-link to="/about">About</router-link>
+    </div>
   </div>
 </template>
 
 <script>
-import { clearLogin } from "../api/utils";
-
 export default {
-  name: "MenuCustom",
-  methods: {
-    logoutUser() {
-      this.$router.push("/");
-      return clearLogin();
-    },
-  },
+  name: "MenuCustom"
 };
 </script>
 
 <style scoped>
 #nav {
-  background: #37323e;
+  padding: 1rem;
+}
+
+#router {
+  color: #f094a9;
+}
+
+a {
+  font-weight: bold;
+  color: #f2f5ea;
+  text-decoration: none;
+}
+
+a.router-link-exact-active {
+  color: #7a9b76;
+}
+h1 {
+  color: #f2f5ea;
+  text-shadow: 2px 2px #e75a7c;
+  margin: 1rem;
 }
 </style>
