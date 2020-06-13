@@ -1,25 +1,14 @@
 <template>
-  <div>
-    <p>{{ copyright }}</p>
+  <div class="footer">
+    <h3>Brais Montáns Bouza - 2020</h3>
   </div>
 </template>
 
 <script>
 export default {
-  name: "footercustom",
-  data() {
-    return {
-      copyright: "Brais Montáns Bouza - 2020"
-    };
-  }
+  name: "FooterCustom"
 };
 </script>
 
-<style scoped>
-p {
-  color: #f2f5ea;
-  font-weight: bold;
-  font-style: italic;
-  margin: 3rem;
-}
+<style>
 </style>

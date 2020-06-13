@@ -1,34 +1,47 @@
 <template>
   <div id="app">
     <router-view />
+    <br />
+    <br />
+    <footercustom></footercustom>
   </div>
 </template>
 
+<script>
+import footercustom from "@/components/FooterCustom.vue";
+
+export default {
+  name: "App",
+  components: { footercustom },
+};
+</script>
+
 <style>
-/* Estilos generales de la web */
-@import url("https://fonts.googleapis.com/css2?family=Comfortaa&display=swap");
-
-body {
-  margin: 0;
-  box-sizing: border-box;
-}
-
-html,
-body {
-  background: #6b0f1a;
+body,
+html {
+  margin: 0 auto;
   height: 100vh;
+  background: #f3eff5;
 }
+
 #app {
-  font-family: Comfortaa;
+  font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  background: #6b0f1a;
+  color: #0d0a0b;
+}
+
+#nav {
+  padding: 30px;
 }
 
 a {
   font-weight: bold;
-  color: #e75a7c;
-  text-decoration: none;
+  color: #a3c4bc;
+}
+
+a.router-link-exact-active {
+  color: #cf4d6f;
 }
 </style>

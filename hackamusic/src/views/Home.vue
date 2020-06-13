@@ -1,42 +1,99 @@
 <template>
-  <div>
-    <vue-headful title="Home" />
+  <div class="home">
     <menucustom></menucustom>
-    <div>
-      <h1>WELCOME TO HACK FM</h1>
-      <p>CHECK OUT WHAT THE TOP ARTISTS AND SONGS OF THE WEEK ARE BY CLICKING ON THE MENU ABOVE</p>
+    <h2>LISTA DE CLIENTES</h2>
+    <div class="clientes" v-for="(cliente, index) in clientes" :key="cliente.id">
+      <h1>{{ cliente.nombre }} {{cliente.apellido}}</h1>
+      <p>ID: {{ cliente.id }}</p>
+      <p>CIUDAD: {{ cliente.ciudad }}</p>
+      <p>EMPRESA: {{ cliente.empresa }}</p>
+      <button @click="deleteClients(index)">BORRAR</button>
+      <button @click="openModal()">Editar</button>
       <br />
-      <p>YOU CAN ALSO CLICK ON THE TAGS BELOW TO DISCOVER NEW ARTISTS BASED ON YOUR FAVOURITE GENRES</p>
+      <br />
     </div>
-    <tags :tags="tags"></tags>
-    <footercustom></footercustom>
+
+    <!-- MODAL PARA EDITAR CLIENTES -->
+    <div v-show="modal" class="modal">
+      <div class="modalBox">
+        <h2>Modal para datos</h2>
+        <input type="text" placeholder="Hola, soy un input" />
+        <br />
+        <br />
+        <button @click="closeModal()">Cerrar</button>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import api from "@/api/index.js";
-import tags from "@/components/tags.vue";
-import footercustom from "@/components/FooterCustom.vue";
 import menucustom from "@/components/MenuCustom.vue";
+import axios from "axios";
 
 export default {
   name: "Home",
-  components: { tags, footercustom, menucustom },
+  components: { menucustom },
   data() {
     return {
-      tags: [] /* array vacio donde metemos la respuesta de la Api */
+      clientes: [],
+      modal: false
     };
   },
-  /* datos sacados de la API */
+  methods: {
+    getClients() {
+      var self = this;
+      axios
+        .get("http://localhost:3050/clientes")
+        .then(function(response) {
+          console.log(response);
+          self.clientes = response.data;
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
+    deleteClients(index) {
+      this.id = this.clientes[index].id;
+
+      axios
+        .delete("http://localhost:3050/clientes/del/" + this.id, {
+          id: this.id
+        })
+        .then(function(response) {
+          console.log(response);
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
+    openModal() {
+      this.modal = true;
+    },
+    closeModal() {
+      this.modal = false;
+    }
+  },
   created() {
-    api.getTags().then(response => (this.tags = response.data.tags.tag));
+    this.getClients();
   }
 };
 </script>
+
 <style scoped>
-div {
-  color: #f2f5ea;
-  margin: 3rem;
-  font-size: 15px;
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  width: 100%;
+}
+
+.modalBox {
+  background: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
 }
 </style>
