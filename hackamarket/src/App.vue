@@ -17,19 +17,22 @@ export default {
 </script>
 
 <style>
+@import url("https://fonts.googleapis.com/css?family=Noto+Sans:400,400i,700,700i&subset=greek-ext");
+
 body,
 html {
   margin: 0 auto;
   height: 100vh;
-  background: #f3eff5;
+  background: #ffff70;
+  font-family: "Noto Sans", sans-serif;
 }
 
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: Noto, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #0d0a0b;
+  color: #080b0c;
 }
 
 #nav {
@@ -39,9 +42,10 @@ html {
 a {
   font-weight: bold;
   color: #a3c4bc;
+  text-decoration: none;
 }
 
 a.router-link-exact-active {
-  color: #cf4d6f;
+  color: #ffff70;
 }
 </style>

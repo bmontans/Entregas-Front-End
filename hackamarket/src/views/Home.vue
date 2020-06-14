@@ -1,47 +1,56 @@
 <template>
-  <div class="home">
+  <div>
     <menucustom></menucustom>
-    <h2>LISTA DE CLIENTES</h2>
-    <div class="clientes" v-for="(cliente, index) in clientes" :key="cliente.id">
-      <h1>{{ cliente.nombre }} {{cliente.apellido}}</h1>
-      <p>ID: {{ cliente.id }}</p>
-      <p>CIUDAD: {{ cliente.ciudad }}</p>
-      <p>EMPRESA: {{ cliente.empresa }}</p>
-      <button @click="deleteClients(index)">BORRAR</button>
-      <button @click="openModal()">Editar</button>
-      <br />
-      <br />
-    </div>
-
-    <!-- MODAL PARA EDITAR CLIENTES -->
-    <div v-show="modal" class="modal">
+    <clientescustom
+      class="box"
+      v-show="!editClient"
+      :clientes="clientes"
+      v-on:borrar="deleteClients"
+      v-on:editar="showEditText"
+    ></clientescustom>
+    <div class="modal" v-show="editClient">
       <div class="modalBox">
-        <h2>Modal para datos</h2>
-        <input type="text" placeholder="Hola, soy un input" />
+        <p class="editClient">Edita los datos del cliente</p>
+        <p>Nombre:</p>
+        <input type="text" v-model="newNombre" placeholder="Nombre" />
         <br />
+        <input type="text" v-model="newApellido" placeholder="Apellido" />
         <br />
-        <button @click="closeModal()">Cerrar</button>
+        <input type="text" v-model="newCiudad" placeholder="Ciudad" />
+        <br />
+        <input type="text" v-model="newEmpresa" placeholder="Empresa" />
+        <br />
+        <button @click="updateClients()">Actualizar</button>
+        <button @click="reloadPage()">Cerrar</button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import menucustom from "@/components/MenuCustom.vue";
 import axios from "axios";
+import Swal from "sweetalert2";
+
+import menucustom from "../components/MenuCustom";
+import clientescustom from "../components/ClientesCustom";
 
 export default {
   name: "Home",
-  components: { menucustom },
+  components: { menucustom, clientescustom },
   data() {
     return {
       clientes: [],
-      modal: false
+      newNombre: "",
+      newApellido: "",
+      newCiudad: "",
+      newEmpresa: "",
+      id: null,
+      editClient: false,
     };
   },
   methods: {
     getClients() {
-      var self = this;
+      const self = this;
       axios
         .get("http://localhost:3050/clientes")
         .then(function(response) {
@@ -49,36 +58,60 @@ export default {
           self.clientes = response.data;
         })
         .catch(function(error) {
-          console.log(error);
+          console.error(error);
         });
     },
-    deleteClients(index) {
-      this.id = this.clientes[index].id;
-
+    deleteClients(data) {
+      let id = data;
       axios
-        .delete("http://localhost:3050/clientes/del/" + this.id, {
-          id: this.id
-        })
+        .delete("http://localhost:3050/clientes/del/" + id)
         .then(function(response) {
           console.log(response);
         })
         .catch(function(error) {
-          console.log(error);
+          console.error(error);
         });
     },
-    openModal() {
-      this.modal = true;
+    updateClients() {
+      const self = this;
+      axios
+        .put("http://localhost:3050/clientes/edit/" + self.id, {
+          nombre: self.newNombre,
+          apellido: self.newApellido,
+          ciudad: self.newCiudad,
+          empresa: self.newEmpresa,
+          id: self.id,
+        })
+        .then(function(response) {
+          self.editClient = false;
+          Swal.fire(
+            "¡Cliente actualizado correctamente!",
+            "Pulsa OK para continuar.",
+            "success"
+          );
+          console.log(response);
+        })
+        .catch(function(error) {
+          console.error(error);
+        });
     },
-    closeModal() {
-      this.modal = false;
-    }
+    showEditText(data) {
+      this.editClient = true;
+      this.newNombre = data.nombre;
+      this.newApellido = data.apellido;
+      this.newCiudad = data.ciudad;
+      this.newEmpresa = data.empresa;
+      this.id = data.id;
+    },
+    reloadPage() {
+      location.reload();
+    },
   },
   created() {
     this.getClients();
-  }
+  },
 };
 </script>
-
 <style scoped>
 .modal {
   position: fixed;
@@ -88,7 +121,6 @@ export default {
   background: rgba(0, 0, 0, 0.5);
   width: 100%;
 }
-
 .modalBox {
   background: #fefefe;
   margin: 15% auto;

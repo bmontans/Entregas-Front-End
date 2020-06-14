@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import { isLoggedIn } from "../api/utils";
 import { checkAdmin } from "../api/utils";
+import Swal from "sweetalert2";
 
 Vue.use(VueRouter);
 
@@ -53,11 +54,15 @@ const routes = [
     path: "/market",
     name: "Market",
     component: () => import("../views/Market.vue"),
+    meta: { allowAnonymous: false },
   },
   {
     path: "*",
     name: "Error",
     component: () => import("../views/Error.vue"),
+    meta: {
+      allowAnonymous: true,
+    },
   },
 ];
 
@@ -78,6 +83,11 @@ router.beforeEach((to, from, next) => {
     next({
       path: "/home",
       query: { redirect: to.fullPath },
+    });
+    Swal.fire({
+      icon: "error",
+      title: "Ooops...",
+      text: "Unicamente los administradores tienen acceso a esta pestaña.",
     });
   } else {
     next();

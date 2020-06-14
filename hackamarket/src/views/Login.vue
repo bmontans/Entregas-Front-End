@@ -1,19 +1,22 @@
 <template>
   <div>
-    <h1>Bienvenido a Hack-a-Market</h1>
-    <h2>Haz Login</h2>
-    <input type="text" placeholder="Escribe tu email" v-model="email" />
-    <input
-      type="password"
-      placeholder="Escribe tu contraseña"
-      v-model="password"
-    />
-    <button @click="login()">LOGIN</button>
-    <div>
-      <br />
-      En caso de que no tengas una cuenta creada, haz click
-      <router-link to="/add-user">aquí</router-link> para crear un nuevo
-      usuario.
+    <vue-headful title="Login" />
+    <div class="login">
+      <h1>Bienvenido a Hack-a-Market</h1>
+      <h2>Haz Login</h2>
+      <input type="text" placeholder="Escribe tu email" v-model="email" />
+      <input
+        type="password"
+        placeholder="Escribe tu contraseña"
+        v-model="password"
+      />
+      <button @click="login()">LOGIN</button>
+      <div>
+        <br />
+        En caso de que no tengas una cuenta creada, haz click
+        <router-link to="/add-user">aquí</router-link> para crear un nuevo
+        usuario.
+      </div>
     </div>
   </div>
 </template>
@@ -49,5 +52,8 @@ export default {
 a {
   font-weight: bold;
   color: #cf4d6f;
+}
+.login {
+  margin: 10rem;
 }
 </style>

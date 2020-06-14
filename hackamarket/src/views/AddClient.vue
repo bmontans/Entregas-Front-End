@@ -1,5 +1,6 @@
 <template>
   <div>
+    <vue-headful title="Añadir cliente" />
     <menucustom></menucustom>
     <p v-show="required">TIENES DATOS AÚN POR RELLENAR.</p>
     <!-- FORMULARIO -->
@@ -7,6 +8,7 @@
       <br />
       <br />
       <label for="nombre">Nombre:</label>
+      <br />
       <input
         type="text"
         name="nombre"
@@ -14,7 +16,9 @@
         v-model="nombre"
       />
       <br />
+      <br />
       <label for="apellido">Apellido:</label>
+      <br />
       <input
         type="text"
         name="apellido"
@@ -22,7 +26,9 @@
         v-model="apellido"
       />
       <br />
+      <br />
       <label for="ciudad">Ciudad:</label>
+      <br />
       <input
         type="text"
         name="ciudad"
@@ -30,7 +36,9 @@
         v-model="ciudad"
       />
       <br />
+      <br />
       <label for="empresa">Empresa:</label>
+      <br />
       <input
         type="text"
         name="empresa"
@@ -48,6 +56,7 @@
 
 <script>
 import menucustom from "@/components/MenuCustom.vue";
+import Swal from "sweetalert2";
 import axios from "axios";
 
 export default {
@@ -99,7 +108,11 @@ export default {
             console.log(error);
           });
       } else {
-        alert("No has rellenado todos los campos.");
+        Swal.fire({
+          icon: "error",
+          title: "Ooops...",
+          text: "Debes rellenar todos los campos",
+        });
       }
     },
     emptyFields() {

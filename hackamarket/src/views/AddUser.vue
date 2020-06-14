@@ -1,24 +1,30 @@
 <template>
   <div>
+    <vue-headful title="Add user" />
+    <menulogin></menulogin>
+    <br />
+    <br />
     <p v-show="required">TIENES DATOS AÚN POR RELLENAR.</p>
     <!-- FORMULARIO -->
     <div>
-      <label for="nombre">Email:</label>
+      <label for="nombre">Nombre de usuario</label>
+      <br />
       <input
         type="text"
         name="email"
-        placeholder="User email..."
+        placeholder="Nombre de usuario..."
         v-model="email"
       />
       <br />
-      <label for="password">Password:</label>
+      <br />
+      <label for="password">Contraseña</label>
+      <br />
       <input
         type="text"
         name="password"
-        placeholder="User password"
+        placeholder="Contraseña"
         v-model="password"
       />
-      <br />
       <br />
       <br />
       <button @click="addUser(email, password)">
@@ -30,9 +36,12 @@
 
 <script>
 import axios from "axios";
+import Swal from "sweetalert2";
+import menulogin from "@/components/MenuLogin.vue";
 
 export default {
   name: "AddUser",
+  components: { menulogin },
   data() {
     return {
       email: "",
@@ -66,6 +75,11 @@ export default {
           .then(function(response) {
             self.emptyFields();
             console.log(response);
+            Swal.fire(
+              "¡Usuario creado correctamente!",
+              "Vuelve al menú principal y entra con tus credenciales.",
+              "success"
+            );
           })
           .catch(function(error) {
             console.log(error);
@@ -85,5 +99,9 @@ export default {
 <style scoped>
 p {
   color: red;
+}
+
+label {
+  padding: 2rem;
 }
 </style>

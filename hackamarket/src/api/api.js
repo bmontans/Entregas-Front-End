@@ -71,9 +71,6 @@ app.get("/productos", (req, res) => {
 });
 
 // FUNCION PARA CREAR CLIENTES //
-app.get("/", (req, res) => {
-  res.send("Hola");
-});
 
 app.post("/add", (req, res) => {
   const sql = "INSERT INTO clientes SET ?";
@@ -90,6 +87,8 @@ app.post("/add", (req, res) => {
   });
 });
 
+// FUNCION PARA CREAR USERS //
+
 app.post("/addUser", (req, res) => {
   const sql = "INSERT INTO usuarios SET ?";
   const newClient = {
@@ -104,6 +103,27 @@ app.post("/addUser", (req, res) => {
   });
 });
 
+// FUNCION PARA EDITAR CLIENTES //
+
+app.put("/clientes/edit/:id", (req, res) => {
+  const { id } = req.body;
+  const { nombre } = req.body;
+  const { apellido } = req.body;
+  const { ciudad } = req.body;
+  const { empresa } = req.body;
+
+  const sql = `UPDATE clientes SET nombre='${nombre}',
+      apellido='${apellido}',
+      ciudad='${ciudad}',
+      empresa='${empresa}'
+      WHERE id='${id}'`;
+  connection.query(sql, (error) => {
+    if (error) throw error;
+    res.send("Usuario creado");
+  });
+});
+
+// FUNCION PARA BORRAR CLIENTES //
 app.delete("/clientes/del/:id", (req, res) => {
   const id = req.params.id;
   const sql = `DELETE FROM clientes WHERE id=${id}`;
