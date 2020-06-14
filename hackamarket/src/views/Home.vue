@@ -89,6 +89,7 @@ export default {
             "Pulsa OK para continuar.",
             "success"
           );
+          location.reload();
           console.log(response);
         })
         .catch(function(error) {
