@@ -2,7 +2,7 @@
   <div>
     <vue-headful title="Login" />
     <div class="login">
-      <h1>Bienvenido a Hack-a-Market</h1>
+      <h1>Bienvenido/a a Hack-a-Market</h1>
       <h2>Haz Login</h2>
       <input type="text" placeholder="Escribe tu email" v-model="email" />
       <input
